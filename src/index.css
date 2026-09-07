@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Thème clair par défaut */
+  :root {
+    /* Fond général et texte */
+    --background: 210 40% 97%;
+    --foreground: 222 47% 8%;
+
+    /* Cartes et popovers */
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 8%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 12%;
+
+    /* Couleur principale (bleu/teal) */
+    --primary: 192 85% 46%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Surfaces secondaires (sections comme about/projects/partners) */
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 14%;
+
+    /* Texte atténué */
+    --muted: 210 32% 94%;
+    --muted-foreground: 215 16% 22%;
+
+    /* Accent violet utilisé dans les dégradés */
+    --accent: 260 60% 56%;
+    --accent-foreground: 0 0% 100%;
+
+    /* États destructifs (erreurs/toasts) */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Bordures / champs */
+    --border: 215 25% 80%;
+    --input: 215 25% 80%;
+    --ring: 192 85% 46%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar (si utilisée) */
+    --sidebar-background: 210 40% 97%;
+    --sidebar-foreground: 222 47% 8%;
+    --sidebar-primary: 192 85% 46%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 40% 96%;
+    --sidebar-accent-foreground: 222 47% 18%;
+    --sidebar-border: 215 25% 85%;
+    --sidebar-ring: 192 85% 46%;
+
+    /* Tokens personnalisés (dégradés + ombres) */
+    --gradient-primary: linear-gradient(135deg, hsl(192, 85%, 55%), hsl(260, 60%, 62%));
+    --gradient-text: linear-gradient(135deg, hsl(192, 85%, 50%), hsl(260, 60%, 60%));
+    --shadow-glow: 0 0 40px hsl(192 85% 50% / 0.22);
+    --shadow-card: 0 18px 40px hsl(220 20% 70% / 0.28);
+  }
+
+  /* Thème sombre (classe .dark sur <html>) */
+  .dark {
+    /* Fond légèrement éclairci pour plus de lisibilité */
+    --background: 222 26% 10%;
+    --foreground: 210 20% 94%;
+
+    /* Cartes un peu plus claires que le fond */
+    --card: 222 22% 13%;
+    --card-foreground: 210 20% 94%;
+
+    --popover: 222 22% 13%;
+    --popover-foreground: 210 20% 94%;
+
+    /* Couleur principale identique au clair pour la cohérence */
+    --primary: 192 85% 50%;
+    --primary-foreground: 222 47% 10%;
+
+    /* Surfaces secondaires (sections, bandes) */
+    --secondary: 222 18% 16%;
+    --secondary-foreground: 210 20% 88%;
+
+    /* Texte atténué plus lisible */
+    --muted: 222 18% 14%;
+    --muted-foreground: 215 15% 70%;
+
+    --accent: 260 60% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* Bordures un peu plus claires pour mieux marquer les cartes */
+    --border: 222 18% 24%;
+    --input: 222 18% 24%;
+    --ring: 192 85% 52%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 222 24% 9%;
+    --sidebar-foreground: 210 20% 94%;
+    --sidebar-primary: 192 85% 50%;
+    --sidebar-primary-foreground: 222 47% 10%;
+    --sidebar-accent: 222 18% 16%;
+    --sidebar-accent-foreground: 210 20% 92%;
+    --sidebar-border: 222 18% 24%;
+    --sidebar-ring: 192 85% 52%;
+
+    /* Dégradés et ombres adaptés au fond plus clair */
+    --gradient-primary: linear-gradient(135deg, hsl(192, 85%, 52%), hsl(260, 60%, 62%));
+    --gradient-text: linear-gradient(135deg, hsl(192, 85%, 65%), hsl(260, 60%, 70%));
+    --shadow-glow: 0 0 40px hsl(192 85% 50% / 0.35);
+    --shadow-card: 0 16px 40px hsl(222 40% 2% / 0.8);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-border {
+    position: relative;
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--gradient-primary);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  .glass {
+    background: hsl(var(--background) / 0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--border) / 0.7);
+    box-shadow: 0 10px 30px hsl(var(--background) / 0.25);
+  }
+}
