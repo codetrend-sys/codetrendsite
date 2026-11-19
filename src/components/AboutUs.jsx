@@ -76,16 +76,19 @@ const AboutUs = () => {
 
               <div className="flex flex-wrap gap-2">
                 <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-                  Production vidéo
+                  Production Vidéo
                 </span>
                 <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-                  Social Media
+                  Marketing Digital
                 </span>
                 <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-                  Brand Content
+                  Développement Web
                 </span>
                 <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-                  développement web
+                  Social Media &amp; Ads
+                </span>
+                <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                  SEO &amp; Visibilité
                 </span>
               </div>
             </div>

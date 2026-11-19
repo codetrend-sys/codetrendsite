@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/logo.png";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -10,12 +11,15 @@ const navItems = [
   { label: "Nos Services", href: "#services" },
   { label: "Projets", href: "#projects" },
   { label: "Témoignages", href: "#testimonials" },
+  { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ];
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,9 +31,8 @@ const Navbar = () => {
 
   const scrollTo = (href) => {
     setMobileMenuOpen(false);
-    
-    // Attendre la fermeture de l'animation pour calculer le défilement exact
-    setTimeout(() => {
+
+    if (href.startsWith("#")) {
       const targetElement = document.querySelector(href);
       if (targetElement) {
         const headerOffset = 70;
@@ -38,10 +41,46 @@ const Navbar = () => {
 
         window.scrollTo({
           top: Math.max(0, offsetPosition),
-          behavior: "smooth"
+          behavior: "smooth",
         });
+        return;
       }
-    }, 100);
+    }
+
+    if (location.pathname !== "/") {
+      if (href.startsWith("#")) {
+        navigate("/" + href);
+      } else {
+        navigate(href);
+      }
+      return;
+    }
+
+    if (href.startsWith("#")) {
+      setTimeout(() => {
+        const targetElement = document.querySelector(href);
+        if (targetElement) {
+          const headerOffset = 70;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: Math.max(0, offsetPosition),
+            behavior: "smooth",
+          });
+        }
+      }, 100);
+    } else {
+      navigate(href);
+    }
+  };
+
+  const handleLogoClick = () => {
+    if (location.pathname !== "/") {
+      navigate("/");
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   return (
@@ -60,7 +99,7 @@ const Navbar = () => {
           src={logo} 
           alt="Code Trend" 
           className="h-9 md:h-10 cursor-pointer" 
-          onClick={() => scrollTo("#hero")} 
+          onClick={handleLogoClick} 
         />
         
         {/* Navigation Desktop (Inchangée) */}

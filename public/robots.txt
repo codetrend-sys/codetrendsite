@@ -1,14 +1,45 @@
+# robots.txt for Code Trend (https://www.thecodetrend.com)
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Search Engines
 User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
 Allow: /
 
 User-agent: Bingbot
 Allow: /
 
-User-agent: Twitterbot
+# AI Crawlers & LLM Engines (GEO - Generative Engine Optimization)
+User-agent: OAI-SearchBot
 Allow: /
 
-User-agent: facebookexternalhit
+User-agent: GPTBot
 Allow: /
 
-User-agent: *
+User-agent: ChatGPT-User
 Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# Sitemaps & AI Knowledge Base
+Sitemap: https://www.thecodetrend.com/sitemap.xml

@@ -1,4 +1,5 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import {
   Megaphone,
   Code2,
@@ -24,6 +25,7 @@ const services = [
     description: "Campagnes multicanales, gestion de publicité (Ads) et stratégies de conversion pour booster votre croissance.",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
     className: "md:col-span-2",
+    link: "/agence-marketing-digital-tanger",
   },
   {
     icon: Code2,
@@ -31,6 +33,7 @@ const services = [
     description: "Création de sites web haute performance, design UX/UI intuitif et solutions e-commerce modernes.",
     image: web,
     className: "md:col-span-1",
+    link: "/creation-site-web",
   },
   {
     icon: Video,
@@ -38,6 +41,7 @@ const services = [
     description: "Réalisation de vidéos haute qualité, du storytelling au montage, pour captiver votre audience.",
     image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&q=80&w=800",
     className: "md:col-span-1",
+    link: "/production-audiovisuelle",
   },
   {
     icon: Share2,
@@ -45,6 +49,7 @@ const services = [
     description: "Animation de vos communautés, stratégie de contenu et veille pour une présence digitale impactante.",
     image: social,
     className: "md:col-span-2",
+    link: "/social-media-management",
   },
   {
     icon: Camera,
@@ -52,6 +57,7 @@ const services = [
     description: "Séances de shooting professionnelles pour vos produits et portraits, capturant l'essence de votre marque.",
     image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=800",
     className: "md:col-span-1",
+    link: "/shooting-photo-video",
   },
   {
     icon: PenSquare,
@@ -59,6 +65,7 @@ const services = [
     description: "Définition de votre ADN de marque, design de logo et identité visuelle pour vous démarquer.",
     image: brand,
     className: "md:col-span-1",
+    link: "/branding-positioning",
   },
   {
     icon: Target,
@@ -66,6 +73,7 @@ const services = [
     description: "Conception de contenus viraux et engageants adaptés à chaque plateforme pour booster votre visibilité.",
     image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800",
     className: "md:col-span-1 md:row-span-1",
+    link: "/creation-contenu-digital",
   },
   {
     icon: Search,
@@ -73,6 +81,7 @@ const services = [
     description: "Optimisation pour les moteurs de recherche et stratégies de présence locale pour dominer les résultats.",
     image: imgSeo,
     className: "md:col-span-1",
+    link: "/seo-visibilite",
   },
   {
     icon: GraduationCap,
@@ -80,10 +89,12 @@ const services = [
     description: "Conseils stratégiques personnalisés et plans d'action pour débloquer votre plein potentiel de croissance.",
     image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800",
     className: "md:col-span-2",
+    link: "/consulting-growth-strategy",
   },
 ];
 
 const ServiceCard = ({ service, index }) => {
+  const navigate = useNavigate();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -110,6 +121,12 @@ const ServiceCard = ({ service, index }) => {
     y.set(0);
   };
 
+  const handleCardClick = () => {
+    if (service.link) {
+      navigate(service.link);
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -118,12 +135,15 @@ const ServiceCard = ({ service, index }) => {
       transition={{ duration: 0.5, delay: index * 0.1 }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onClick={handleCardClick}
       style={{
         rotateX,
         rotateY,
         transformStyle: "preserve-3d",
       }}
-      className={`group relative overflow-hidden rounded-[2.5rem] bg-card border border-border/50 transition-colors hover:border-primary/50 ${service.className} min-h-[280px]`}
+      className={`group relative overflow-hidden rounded-[2.5rem] bg-card border border-border/50 transition-colors hover:border-primary/50 ${service.className} min-h-[280px] ${
+        service.link ? "cursor-pointer" : ""
+      }`}
     >
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
@@ -185,9 +205,9 @@ const About = () => {
             <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-6">
               Nos Services
             </span>
-            <h2 className="text-5xl md:text-7xl font-bold leading-[1.1]">
-              Nous ne suivons pas les tendances, <br />
-              <span className="gradient-text">Nous les créons.</span>
+            <h2 className="text-4xl md:text-6xl font-bold leading-[1.1]">
+              Des solutions digitales conçues pour <br />
+              <span className="gradient-text">votre croissance.</span>
             </h2>
           </motion.div>
 

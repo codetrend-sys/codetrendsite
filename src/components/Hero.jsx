@@ -23,13 +23,17 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
           className="max-w-4xl mx-auto"
         >
+          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/20 backdrop-blur-sm border border-primary/30 text-blue-200 dark:text-primary text-xs md:text-sm font-medium tracking-wide uppercase mb-6">
+            Agence Digitale &amp; Production Vidéo · Tanger, Maroc
+          </span>
+
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold leading-tight mb-6 text-blue-300 dark:text-card-foreground transition-colors duration-200">
             On ne suit pas la tendance,{" "}
             <span className="gradient-text">on la crée.</span>
           </h1>
 
           <p className="text-base sm:text-lg md:text-xl text-white dark:text-muted-foreground max-w-2xl mx-auto mb-10 transition-colors duration-200">
-            Production audiovisuelle, vidéos engageantes et contenu créatif pour propulser votre marque vers l'avenir.
+            Production audiovisuelle, marketing digital de performance et conception web moderne pour propulser votre marque vers l&apos;avenir à Tanger et partout au Maroc.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
